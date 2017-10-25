@@ -1,0 +1,546 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Eventos</title>
+
+
+</h:head>
+
+<h:body style="background-color:#B0E0E6;">
+
+
+
+
+	<p:growl id="avisoRetorno" />
+
+
+	<p:tabMenu activeIndex="#{param.i}">
+
+		<p:menuitem value="Alertas" outcome="/Manter/ManterEventos">
+			<f:param name="i" value="0" />
+		</p:menuitem>
+
+		<p:menuitem value="Colaboradores" outcome="/Manter/ManterFuncionario">
+			<f:param name="i" value="1" />
+		</p:menuitem>
+	
+
+	</p:tabMenu>
+
+
+
+	
+
+
+		<h:form id="cabecalho">
+
+
+
+
+			<h:panelGrid columns="4" cellpadding="3">
+
+
+					<p:commandButton id="modalDialogButton" value="Novo Evento"
+						action="#{evento.novo}" onclick="inserirDialog.show()"
+						update=":formTabelaEvento:datatableEvento,:formInserirEvento:modalDialog"
+						type="button" icon="ui-icon-extlink" />
+
+
+
+
+					<p:commandButton value="Logout" action="#{login.realizarLogout()}"
+						style="float:right;" ></p:commandButton>
+
+
+			</h:panelGrid>
+
+
+		</h:form>
+
+
+
+	
+
+
+
+	<h:form id="formTabelaEvento">
+
+
+
+		<p:messages id="messages" autoUpdate="true" closable="true" />
+
+		<p:dataTable id="datatableEvento" var="lista"
+			value="#{evento.listaEvento}" emptyMessage="Dados não encontrados"
+			paginator="true" rows="10">
+
+
+			<p:column headerText="Tecnologia" style="text-align: center">
+
+				<h:outputText value="#{lista.tecnologia}"></h:outputText>
+
+			</p:column>
+
+
+			<p:column id="Ambiente" headerText="Ambiente" style="text-align: center">
+
+				<h:outputText value="#{lista.ambiente}"></h:outputText>
+
+			</p:column>
+
+			<p:column headerText="Equipe" style="text-align: center">
+
+				<h:outputText value="#{lista.equipe}"></h:outputText>
+
+			</p:column>
+
+			
+			<p:column headerText="Descrição" style="text-align: center">
+
+				<h:outputText value="#{lista.descricao}"></h:outputText>
+
+			</p:column>
+
+			
+
+			<p:column headerText="Ação" style="text-align: center">
+
+				<p:commandButton icon="ui-icon-arrowrefresh-1-w"
+					onclick="alterarDialog.show()"
+					update=":formAlterarEvento:panelAlterar,:formAlterarEvento:panelDescAlterar,:formAlterarEvento:panelDatasAlterar">
+
+					<f:setPropertyActionListener value="#{lista}"
+						target="#{evento.eventoPOJO}" />
+				</p:commandButton>
+
+
+
+
+				<p:commandButton styleClass="ui-priority-primary"
+					icon="ui-icon-close" onclick="confirmation.show()">
+
+
+					<f:setPropertyActionListener value="#{lista}"
+						target="#{Evento.EventoPOJO}" />
+
+				</p:commandButton>
+
+
+				<p:commandButton value="Ocorrências"
+					action="#{Evento.redirecionarCenario}"
+					update=":formAlterarEvento:panelAlterar,:formAlterarEvento:panelDescAlterar,:formAlterarEvento:panelDatasAlterar">
+
+					<f:setPropertyActionListener value="#{lista}"
+						target="#{Evento.EventoPOJO}" />
+				</p:commandButton>
+
+
+				<p:commandButton value="Relatórios"
+					action="#{Evento.redirecionarRelatorio}"
+					update=":formAlterarEvento:panelAlterar,:formAlterarEvento:panelDescAlterar,:formAlterarEvento:panelDatasAlterar">
+
+					<f:setPropertyActionListener value="#{lista}"
+						target="#{Evento.EventoPOJO}" />
+				</p:commandButton>
+
+			</p:column>
+
+
+
+
+		</p:dataTable>
+
+
+		<p:confirmDialog id="confirmDialog"
+			message="Tem certeza que deseja deletar?"
+			header="Iniciando exclusão do Evento" severity="alert"
+			widgetVar="confirmation">
+
+
+			<h:panelGrid id="display" columns="2" cellpadding="4"
+				style="margin:0 auto;">
+
+
+
+
+				<p:commandButton id="confirm" value="Sim"
+					oncomplete="confirmation.hide()"
+					actionListener="#{Evento.deletarEvento()}"
+					update="datatableEvento">
+				</p:commandButton>
+
+				<p:commandButton id="decline" value="Não"
+					onclick="confirmation.hide()" type="button" />
+
+			</h:panelGrid>
+
+
+		</p:confirmDialog>
+
+	</h:form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- Form utilizado para inserir um novo Evento -->
+	<!-- Form utilizado para inserir um novo Evento -->
+	<!-- Form utilizado para inserir um novo Evento -->
+	<!-- Form utilizado para inserir um novo Evento -->
+	<!-- Form utilizado para inserir um novo Evento -->
+	<!-- Form utilizado para inserir um novo Evento -->
+	<!-- Form utilizado para inserir um novo Evento -->
+	<!-- Form utilizado para inserir um novo Evento -->
+
+
+
+
+	<h:form id="formInserirEvento" prependId="false">
+
+		<p:dialog id="modalDialog" header="Novo Evento"
+			widgetVar="inserirDialog" modal="true">
+
+
+
+			<h:panelGrid id="panel" columns="4" cellpadding="3">
+
+
+
+
+				<h:outputLabel value="Tecnologia: *" for="tecnologia"></h:outputLabel>
+
+
+
+
+				<p:selectOneMenu id="tecnologia" value="#{evento.eventoPOJO.tecnologia}">
+					<f:selectItem itemLabel=" " itemValue=" " />
+					<f:selectItem itemLabel="WAS" itemValue="WAS" />
+					<f:selectItem itemLabel="MQ" itemValue="MQ" />
+					<f:selectItem itemLabel=".NET" itemValue=".NET" />
+					<f:selectItem itemLabel="BD Oracle" itemValue="BD Oracle" />
+					<f:selectItem itemLabel="SQL" itemValue="SQL" />
+
+					<f:validateLength minimum="2">
+					</f:validateLength>
+				</p:selectOneMenu>
+
+
+
+
+
+				<h:outputLabel value="Ambiente: *" for="ambiente"></h:outputLabel>
+				<p:inputText id="ambiente" value="#{evento.eventoPOJO.ambiente}"
+					required="true" label="ambiente">
+					<f:validateLength minimum="4" />
+				</p:inputText>
+				
+			<h:outputLabel value="Equipe Responsável *" for="equiperesponsavel"></h:outputLabel>
+				<p:selectOneMenu id="equiperesponsavel" value="#{evento.eventoPOJO.equipe}">
+					<f:selectItem itemLabel=" " itemValue=" " />
+					<f:selectItem itemLabel="Coord TI Vida" itemValue="Coord TI Vida" />
+					<f:selectItem itemLabel="Coord TI Auto" itemValue="Coord TI Auto" />
+					<f:selectItem itemLabel="Coord TI RE CONSORCIO E TRANSP" itemValue="Coord TI RE CONSORCIO E TRANSP" />
+
+					<f:validateLength minimum="4">
+					</f:validateLength>
+				</p:selectOneMenu>
+
+
+				<h:outputLabel value="Contato: *" for="contato"></h:outputLabel>
+
+				<p:inputText id="contato" value="#{evento.eventoPOJO.contato}"
+					required="true" label="nome" size="30">
+					<f:validateLength minimum="5" />
+				</p:inputText>
+
+
+
+			</h:panelGrid>
+
+
+			<div align="center">
+
+				<h:panelGrid columns="1" id="panelDesc">
+
+
+
+					<h:outputLabel value="Descrição: *" for="descricao"></h:outputLabel>
+
+
+
+
+
+
+					<p:inputTextarea value="#{evento.eventoPOJO.descricao}" rows="4"
+						cols="70" maxlength="200" autoResize="false" id="descricao">
+
+						<f:validateLength minimum="5" />
+					</p:inputTextarea>
+
+
+
+
+
+
+
+				</h:panelGrid>
+
+			</div>
+
+			<h:panelGrid columns="4" cellpadding="3" id="panelDatas">
+
+				<h:outputLabel value="Data Abertura: *" for="dataAbertura"></h:outputLabel>
+
+				<p:calendar value="#{evento.eventoPOJO.dataAbertura}"
+					id="dataAbertura" size="6">
+
+					<f:validateLength minimum="6"></f:validateLength>
+
+				</p:calendar>
+
+
+			
+				<h:outputLabel value="Status: *" for="status"></h:outputLabel>
+
+
+				<p:selectOneMenu id="status" value="#{evento.eventoPOJO.status}">
+					<f:selectItem itemLabel=" " itemValue=" " />
+					<f:selectItem itemLabel="Em Tratativa" itemValue="Em Tratativa" />
+					<f:selectItem itemLabel="Concluído" itemValue="Concluído" />
+					<f:selectItem itemLabel="Em Acompanhamento" itemValue="Em Acompanhamento" />
+		
+					<f:validateLength minimum="6"></f:validateLength>
+
+
+				</p:selectOneMenu>
+
+			
+
+			</h:panelGrid>
+
+
+
+
+			<div align="center">
+
+				<h:panelGrid columns="2" cellspacing="3">
+
+					<p:commandButton action="#{evento.inserirEvento()}" value="Inserir"
+						oncomplete="inserirDialog.hide()"
+						update=":formTabelaEvento:datatableEvento,:formInserirEvento:modalDialog">
+
+
+					</p:commandButton>
+
+					<p:commandButton value="Limpar" action="#{evento.limparTudo()}"
+						update=":formAlterarEvento:panelAlterar,:formAlterarEvento:panelDescAlterar,:formAlterarEvento:panelDatasAlterar">
+
+
+					</p:commandButton>
+
+				</h:panelGrid>
+			</div>
+
+
+		</p:dialog>
+
+
+	</h:form>
+
+
+
+
+
+
+
+	<!--  form utilizado para alterar um Evento -->
+
+	<!--  form utilizado para alterar um Evento -->
+	<!--  form utilizado para alterar um Evento -->
+	<!--  form utilizado para alterar um Evento -->
+	<!--  form utilizado para alterar um Evento -->
+	<!--  form utilizado para alterar um Evento -->
+	<!--  form utilizado para alterar um Evento -->
+	<!--  form utilizado para alterar um Evento -->
+	<!--  form utilizado para alterar um Evento -->
+	<!--  form utilizado para alterar um Evento -->
+	<!--  form utilizado para alterar um Evento -->
+
+
+
+<h:form id="formAlterarEvento" prependId="false">
+
+		<p:dialog id="modalDialogAlterar" header="Alterar Evento"
+			widgetVar="alterarDialog" modal="true">
+
+
+
+			<h:panelGrid id="panelAlterar" columns="4" cellpadding="3">
+
+
+
+
+				<h:outputLabel value="Tecnologia: *" for="tecnologia"></h:outputLabel>
+
+
+
+
+				<p:selectOneMenu id="tecnologiaAlterar" value="#{evento.eventoPOJO.tecnologia}">
+					<f:selectItem itemLabel=" " itemValue=" " />
+					<f:selectItem itemLabel="WAS" itemValue="WAS" />
+					<f:selectItem itemLabel="MQ" itemValue="MQ" />
+					<f:selectItem itemLabel=".NET" itemValue=".NET" />
+					<f:selectItem itemLabel="BD Oracle" itemValue="BD Oracle" />
+					<f:selectItem itemLabel="SQL" itemValue="SQL" />
+
+					<f:validateLength minimum="2">
+					</f:validateLength>
+				</p:selectOneMenu>
+
+
+
+
+
+				<h:outputLabel value="Ambiente: *" for="ambienteAlterar"></h:outputLabel>
+				<p:inputText id="ambienteAlterar" value="#{evento.eventoPOJO.ambiente}"
+					required="true" label="ambiente">
+					<f:validateLength minimum="4" />
+				</p:inputText>
+				
+			<h:outputLabel value="Equipe Responsável *" for="equiperesponsavelAlterar"></h:outputLabel>
+				<p:selectOneMenu id="equiperesponsavelAlterar" value="#{evento.eventoPOJO.equipe}">
+					<f:selectItem itemLabel=" " itemValue=" " />
+					<f:selectItem itemLabel="Coord TI Vida" itemValue="Coord TI Vida" />
+					<f:selectItem itemLabel="Coord TI Auto" itemValue="Coord TI Auto" />
+					<f:selectItem itemLabel="Coord TI RE CONSORCIO E TRANSP" itemValue="Coord TI RE CONSORCIO E TRANSP" />
+
+					<f:validateLength minimum="4">
+					</f:validateLength>
+				</p:selectOneMenu>
+
+
+				<h:outputLabel value="Contato: *" for="contatoAlterar"></h:outputLabel>
+
+				<p:inputText id="contatoAlterar" value="#{evento.eventoPOJO.contato}"
+					required="true" label="nome" size="30">
+					<f:validateLength minimum="5" />
+				</p:inputText>
+
+
+
+			</h:panelGrid>
+
+
+			<div align="center">
+
+				<h:panelGrid columns="1" id="panelDescAlterar">
+
+
+
+					<h:outputLabel value="Descrição: *" for="descricaoAlterar"></h:outputLabel>
+
+
+
+
+
+
+					<p:inputTextarea value="#{evento.eventoPOJO.descricao}" rows="4"
+						cols="70" maxlength="200" autoResize="false" id="descricaoAlterar">
+
+						<f:validateLength minimum="5" />
+					</p:inputTextarea>
+
+
+
+
+
+
+
+				</h:panelGrid>
+
+			</div>
+
+			<h:panelGrid columns="4" cellpadding="3" id="panelDatasAlterar">
+
+				<h:outputLabel value="Data Abertura: *" for="dataAberturaAlterar"></h:outputLabel>
+
+				<p:calendar value="#{evento.eventoPOJO.dataAbertura}"
+					id="dataAberturaAlterar" size="6">
+
+					<f:validateLength minimum="6"></f:validateLength>
+
+				</p:calendar>
+
+
+			
+				<h:outputLabel value="Status: *" for="statusAlterar"></h:outputLabel>
+
+
+				<p:selectOneMenu id="statusAlterar" value="#{evento.eventoPOJO.status}">
+					<f:selectItem itemLabel=" " itemValue=" " />
+					<f:selectItem itemLabel="Em Tratativa" itemValue="Em Tratativa" />
+					<f:selectItem itemLabel="Concluído" itemValue="Concluído" />
+					<f:selectItem itemLabel="Em Acompanhamento" itemValue="Em Acompanhamento" />
+		
+					<f:validateLength minimum="6"></f:validateLength>
+
+
+				</p:selectOneMenu>
+
+			
+
+			</h:panelGrid>
+
+
+
+
+			<div align="center">
+
+				<h:panelGrid columns="2" cellspacing="3">
+
+					<p:commandButton action="#{evento.alterarEvento()}" value="alterar"
+						oncomplete="alterarDialog.hide()"
+						update=":formTabelaEvento:datatableEvento,:formAlterarEvento:modalDialogAlterar">
+
+
+					</p:commandButton>
+
+					<p:commandButton value="Limpar" action="#{evento.limparTudo()}"
+						update=":formAlterarEvento:panelAlterar,:formAlterarEvento:panelDescAlterar,:formAlterarEvento:panelDatasAlterar">
+
+
+					</p:commandButton>
+
+				</h:panelGrid>
+			</div>
+
+
+		</p:dialog>
+
+
+	</h:form>
+
+
+
+
+
+</h:body>
+</html>
