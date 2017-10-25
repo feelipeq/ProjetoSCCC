@@ -22,19 +22,18 @@
 
 
 
+	<p:tabMenu activeIndex="#{param.i}">
 
+		<p:menuitem value="Eventos" outcome="/Manter/ManterEventos">
+			<f:param name="i" value="0" />
+		</p:menuitem>
 
-<!-- 	<P:TABMENU ACTIVEINDEX="#{PARAM.I}"> -->
+		<p:menuitem value="Colaboradores" outcome="/Manter/ManterFuncionario">
+			<f:param name="i" value="1" />
+		</p:menuitem>
+	
 
-<!-- 		<P:MENUITEM VALUE="PROJETOS" OUTCOME="/MANTER/MANTERPROJETOS"> -->
-<!-- 			<F:PARAM NAME="I" VALUE="0" /> -->
-<!-- 		</P:MENUITEM> -->
-
-<!-- 		<P:MENUITEM VALUE="COLABORADORES" OUTCOME="/MANTER/MANTERFUNCIONARIO"> -->
-<!-- 			<F:PARAM NAME="I" VALUE="1" /> -->
-<!-- 		</P:MENUITEM> -->
-<!-- 	</P:TABMENU> -->
-
+	</p:tabMenu>
 
 
 
@@ -42,13 +41,17 @@
 
 	<h:form id="cabecalho">
 
-		<h:panelGrid columns="1" cellpadding="3">
+		<h:panelGrid columns="4" cellpadding="3">
 
 
 			<p:commandButton id="modalDialogButton" value="Novo Colaborador"
 				action="#{funcionario.novo}" onclick="inserirDialog.show()"
 				update=":formTabelaFunc:datatableFunc,:formInserir:modalDialog"
 				type="button" icon="ui-icon-extlink" />
+				
+				<p:commandButton value="Logout" action="#{login.realizarLogout()}"
+						style="float:right;" ></p:commandButton>
+				
 
 
 		</h:panelGrid>
