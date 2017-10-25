@@ -129,7 +129,7 @@
 
 
 					<f:setPropertyActionListener value="#{lista}"
-						target="#{Evento.EventoPOJO}" />
+						target="#{evento.eventoPOJO}" />
 
 				</p:commandButton>
 
@@ -139,7 +139,7 @@
 					update=":formAlterarEvento:panelAlterar,:formAlterarEvento:panelDescAlterar,:formAlterarEvento:panelDatasAlterar">
 
 					<f:setPropertyActionListener value="#{lista}"
-						target="#{Evento.EventoPOJO}" />
+						target="#{evento.eventoPOJO}" />
 				</p:commandButton>
 
 
@@ -173,7 +173,7 @@
 
 				<p:commandButton id="confirm" value="Sim"
 					oncomplete="confirmation.hide()"
-					actionListener="#{Evento.deletarEvento()}"
+					actionListener="#{evento.deletarEvento()}"
 					update="datatableEvento">
 				</p:commandButton>
 
@@ -235,9 +235,14 @@
 					<f:selectItem itemLabel="WAS" itemValue="WAS" />
 					<f:selectItem itemLabel="MQ" itemValue="MQ" />
 					<f:selectItem itemLabel=".NET" itemValue=".NET" />
+					<f:selectItem itemLabel="Vignette" itemValue="SQL" />
+					<f:selectItem itemLabel="JBoss" itemValue="SQL" />
+					<f:selectItem itemLabel="SOA" itemValue="SQL" />
 					<f:selectItem itemLabel="BD Oracle" itemValue="BD Oracle" />
-					<f:selectItem itemLabel="SQL" itemValue="SQL" />
+					<f:selectItem itemLabel="BD SQL" itemValue="SQL" />
+					<f:selectItem itemLabel="BD Informix" itemValue="SQL" />
 
+					
 					<f:validateLength minimum="2">
 					</f:validateLength>
 				</p:selectOneMenu>
@@ -408,8 +413,12 @@
 					<f:selectItem itemLabel="WAS" itemValue="WAS" />
 					<f:selectItem itemLabel="MQ" itemValue="MQ" />
 					<f:selectItem itemLabel=".NET" itemValue=".NET" />
+					<f:selectItem itemLabel="Vignette" itemValue="SQL" />
+					<f:selectItem itemLabel="JBoss" itemValue="SQL" />
+					<f:selectItem itemLabel="SOA" itemValue="SQL" />
 					<f:selectItem itemLabel="BD Oracle" itemValue="BD Oracle" />
-					<f:selectItem itemLabel="SQL" itemValue="SQL" />
+					<f:selectItem itemLabel="BD SQL" itemValue="SQL" />
+					<f:selectItem itemLabel="BD Informix" itemValue="SQL" />
 
 					<f:validateLength minimum="2">
 					</f:validateLength>

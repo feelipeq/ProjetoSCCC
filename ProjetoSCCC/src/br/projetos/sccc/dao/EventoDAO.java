@@ -12,7 +12,7 @@ public class EventoDAO extends DAO {
 	
 	
 	
-	public String inserir(EventoPOJO evento) {
+	public String inserirEvento(EventoPOJO evento) {
 
 		String retorno = "Evento: " +" " + evento.getTecnologia()+ " "+ " inserido com sucesso!";
 	
@@ -52,7 +52,88 @@ public class EventoDAO extends DAO {
 		return retorno;
 
 	}
+	
+	
+	public String alterarEvento(EventoPOJO evento) {
 
+		String retorno = "Evento: " +" " + evento.getTecnologia()+ " "+ " atualizado com sucesso!";
+	
+
+		try {
+
+			abreConexao();
+			st = cn.prepareStatement("UPDATE tb_evento SET tecnologia = ?, ambiente = ?, descricao = ?, equipe = ?, contato = ?, dataabertura = ?, status = ? WHERE idtb_evento = ? ");
+			st.setString(1, evento.getTecnologia());
+			st.setString(2, evento.getAmbiente());
+			st.setString(3, evento.getDescricao());
+			st.setString(4, evento.getEquipe());
+			st.setString(5, evento.getContato());
+
+			java.sql.Date dataabertura = new java.sql.Date(evento.getDataAbertura().getTime());
+
+			st.setDate(6, dataabertura);
+
+			st.setString(7, evento.getStatus());
+			
+			st.setInt(8, evento.getId());
+
+			st.execute();
+
+		} catch (Exception e) {
+
+			retorno = e.getMessage();
+
+		} finally {
+
+			try {
+				fecharConexao();
+			} catch (Exception e) {
+
+				retorno = e.getMessage();
+			}
+		}
+
+		return retorno;
+
+	}
+	
+	
+	public String deletarEvento(EventoPOJO evento) {
+
+		String retorno = "Evento: " +" " + evento.getTecnologia()+ " "+ " deletado com sucesso!";
+	
+
+		try {
+
+			abreConexao();
+			st = cn.prepareStatement("DELETE from tb_evento WHERE idtb_evento = ? ");
+			st.setString(1, evento.getTecnologia());
+
+			st.setInt(1, evento.getId());
+
+			st.execute();
+
+		} catch (Exception e) {
+
+			retorno = e.getMessage();
+
+		} finally {
+
+			try {
+				fecharConexao();
+			} catch (Exception e) {
+
+				retorno = e.getMessage();
+			}
+		}
+
+		return retorno;
+
+	}
+
+
+	
+	
 	
 
 	public List<EventoPOJO> pesquisarEvento() throws Exception {

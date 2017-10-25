@@ -86,7 +86,31 @@ public class EventoBEAN {
 
 		EventoDAO dao = new EventoDAO();
 
-		String retorno = dao.inserir(eventoPOJO);
+		String retorno = dao.inserirEvento(eventoPOJO);
+
+		eventoPOJO = new EventoPOJO();
+
+		addMessage(retorno);
+
+	}
+	
+	public void alterarEvento() {
+
+		EventoDAO dao = new EventoDAO();
+
+		String retorno = dao.alterarEvento(eventoPOJO);
+
+		eventoPOJO = new EventoPOJO();
+
+		addMessage(retorno);
+
+	}
+	
+	public void deletarEvento() {
+
+		EventoDAO dao = new EventoDAO();
+
+		String retorno = dao.deletarEvento(eventoPOJO);
 
 		eventoPOJO = new EventoPOJO();
 
