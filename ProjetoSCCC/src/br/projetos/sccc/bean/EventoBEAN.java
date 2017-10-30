@@ -1,5 +1,6 @@
 package br.projetos.sccc.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,14 +8,14 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
+import javax.servlet.http.HttpSession;
 
 import br.projetos.sccc.dao.EventoDAO;
 import br.projetos.sccc.pojo.EventoPOJO;
 
 @ViewScoped
 @ManagedBean(name = "evento")
-public class EventoBEAN {
+public class EventoBEAN implements Serializable {
 	
 	
 	private EventoPOJO eventoPOJO;
@@ -130,6 +131,42 @@ public class EventoBEAN {
        this.eventoPOJO.setDataAbertura(null);
        this.eventoPOJO.setStatus(null);
 	}
+	
+	
+	
+	public String redirecionarOcorrencia(){
+		
+		if (this.eventoPOJO.getId() == null) {
+			
+			System.out.println(this.eventoPOJO.getId());
+			
+			return "ManterEventos";
+		
+		} else {
+			
+			
+			FacesContext fc = FacesContext.getCurrentInstance();
+			HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+			session.setAttribute("ID_EVENTO", this.eventoPOJO);
+			
+			System.out.println( "ID do evento " + this.eventoPOJO.getId());
+			
+			return "ManterOcorrencia";
+		}
+		
+		
+		
+
+			
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 }

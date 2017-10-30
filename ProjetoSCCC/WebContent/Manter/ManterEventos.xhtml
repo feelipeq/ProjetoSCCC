@@ -135,7 +135,7 @@
 
 
 				<p:commandButton value="Ocorrências"
-					action="#{Evento.redirecionarCenario}"
+					action="#{evento.redirecionarOcorrencia}"
 					update=":formAlterarEvento:panelAlterar,:formAlterarEvento:panelDescAlterar,:formAlterarEvento:panelDatasAlterar">
 
 					<f:setPropertyActionListener value="#{lista}"
@@ -148,7 +148,7 @@
 					update=":formAlterarEvento:panelAlterar,:formAlterarEvento:panelDescAlterar,:formAlterarEvento:panelDatasAlterar">
 
 					<f:setPropertyActionListener value="#{lista}"
-						target="#{Evento.EventoPOJO}" />
+						target="#{evento.EventoPOJO}" />
 				</p:commandButton>
 
 			</p:column>

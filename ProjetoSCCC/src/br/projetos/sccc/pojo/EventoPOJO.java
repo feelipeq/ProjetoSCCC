@@ -1,8 +1,9 @@
 package br.projetos.sccc.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class EventoPOJO {
+public class EventoPOJO implements Serializable {
 	
 	private Integer id;
 	private String tecnologia;
