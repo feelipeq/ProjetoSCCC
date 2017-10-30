@@ -1,5 +1,6 @@
 package br.projetos.sccc.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,19 +18,17 @@ import br.projetos.sccc.pojo.OcorrenciaPOJO;
 
 @ViewScoped
 @ManagedBean(name = "ocorrencia")
-public class OcorrenciaBEAN {
+public class OcorrenciaBEAN implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private OcorrenciaPOJO ocorrenciaPOJO;
 	private EventoPOJO eventoPOJO;
-	private List<EventoPOJO> listaEvento;
+	private List<OcorrenciaPOJO> listaOcorrencia;
 
-	public OcorrenciaPOJO getOcorrenciaPOJO() {
-		return ocorrenciaPOJO;
-	}
 
-	public void setOcorrenciaPOJO(OcorrenciaPOJO ocorrenciaPOJO) {
-		this.ocorrenciaPOJO = ocorrenciaPOJO;
-	}
 
 	public EventoPOJO getEventoPOJO() {
 		
@@ -47,19 +46,19 @@ public class OcorrenciaBEAN {
 		this.eventoPOJO = eventoPOJO;
 	}
 
-	public List<EventoPOJO> getListaEvento() {
+	public List<OcorrenciaPOJO> getListaOcorrencia() throws Exception {
 
-		this.listaEvento = new ArrayList<EventoPOJO>();
+		this.listaOcorrencia = new ArrayList<OcorrenciaPOJO>();
 
 		OcorrenciaDAO dao = new OcorrenciaDAO();
 
-		setListaEvento(dao.pesquisarEvento(this.getEventoPOJO()));
+		setListaOcorrencia(dao.pesquisarOcorrencia(this.getEventoPOJO()));
 
-		return listaEvento;
+		return listaOcorrencia;
 	}
 
-	public void setListaEvento(List<EventoPOJO> listaEvento) {
-		this.listaEvento = listaEvento;
+	public void setListaOcorrencia(List<OcorrenciaPOJO> listaOcorrencia) {
+		this.listaOcorrencia = listaOcorrencia;
 	}
 
 	// Método para adicionar mensagens de validação
@@ -76,7 +75,16 @@ public class OcorrenciaBEAN {
 	
 	public void novo() {
 		
-		ocorrenciaPOJO = new OcorrenciaPOJO();
+		setOcorrenciaPOJO(new OcorrenciaPOJO());
 	}
+
+	public OcorrenciaPOJO getOcorrenciaPOJO() {
+		return ocorrenciaPOJO;
+	}
+
+	public void setOcorrenciaPOJO(OcorrenciaPOJO ocorrenciaPOJO) {
+		this.ocorrenciaPOJO = ocorrenciaPOJO;
+	}
+
 
 }

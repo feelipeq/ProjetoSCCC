@@ -18,6 +18,10 @@ import br.projetos.sccc.pojo.EventoPOJO;
 public class EventoBEAN implements Serializable {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private EventoPOJO eventoPOJO;
 	private List<EventoPOJO> listaEvento;
 	
@@ -151,7 +155,7 @@ public class EventoBEAN implements Serializable {
 			
 			System.out.println( "ID do evento " + this.eventoPOJO.getId());
 			
-			return "ManterOcorrencia";
+			return "/Manter/ManterOcorrencia";
 		}
 		
 		

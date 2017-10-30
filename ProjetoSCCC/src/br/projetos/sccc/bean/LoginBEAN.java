@@ -75,7 +75,7 @@ public class LoginBEAN {
 			
 			addMessage("Matrícula ou senha inválidos");
 			
-			return "/Login/Login";
+			return "/Login/login";
 			
 			
 		}

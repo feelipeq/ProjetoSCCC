@@ -3,35 +3,31 @@ package br.projetos.sccc.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import br.projetos.sccc.pojo.EventoPOJO;
+import br.projetos.sccc.pojo.OcorrenciaPOJO;
 
 public class OcorrenciaDAO extends DAO {
 
-	public List<EventoPOJO> pesquisarEvento(EventoPOJO eventoPOJO) {
+	public List<OcorrenciaPOJO> pesquisarOcorrencia(EventoPOJO eventoPOJO) throws Exception {
 	
-		List<EventoPOJO> listaEvento = new ArrayList<EventoPOJO>();
+		List<OcorrenciaPOJO> listaOcorrencia = new ArrayList<OcorrenciaPOJO>();
 		
 		try {
 
 			abreConexao();
-			st = cn.prepareStatement("SELECT * FROM tb_ocorrencia WHERE CENARIOPROJETO = ?");
-			st.setString(1, evento.getPsi());
+			st = cn.prepareStatement("SELECT * FROM tb_ocorrencia WHERE ocorrenciaEvento = ?");
+			st.setInt(1, eventoPOJO.getId());
 			rs = st.executeQuery();
 			while (rs.next()) {
 
-				CenarioPOJO cenario = new CenarioPOJO();
+				OcorrenciaPOJO ocorrencia = new OcorrenciaPOJO();
 
-				cenario.setId((Integer) rs.getInt("id"));
-				cenario.setDescricao(rs.getString("descricao"));
-				cenario.setResultadoEsperado(rs.getString("resultadoesperado"));
-				cenario.setObservacao(rs.getString("observacao"));
-				cenario.setDataRealizacao(rs.getDate("datarealizacao"));
-				cenario.setStatus(rs.getString("status"));
-				cenario.setCenarioProjeto(rs.getString("cenarioprojeto"));
-				cenario.setTempo(rs.getInt("tempo"));
+				ocorrencia.setID(rs.getString("id"));
+				ocorrencia.setDescricao(rs.getString("descricao"));
+				ocorrencia.setTipo(rs.getString("tipo"));
+				ocorrencia.setOcorrenciaEvento(rs.getString("ocorrenciaEvento"));
 
-				listaCen.add(cenario);
+				listaOcorrencia.add(ocorrencia);
 			}
 
 		} catch (Exception e) {
@@ -44,13 +40,12 @@ public class OcorrenciaDAO extends DAO {
 			fecharConexao();
 		}
 
-		return listaCen;
+		return listaOcorrencia;
 	}
-		
-		return null;
+
 	}
 	
 	
 
 
-}
+

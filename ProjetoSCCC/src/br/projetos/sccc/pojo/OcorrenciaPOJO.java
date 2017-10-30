@@ -6,7 +6,7 @@ public class OcorrenciaPOJO {
 	private String ID;
 	private String tipo;
 	private String descricao;
-	
+	private String ocorrenciaEvento;
 	
 	
 	
@@ -34,6 +34,14 @@ public class OcorrenciaPOJO {
 	
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public String getOcorrenciaEvento() {
+		return ocorrenciaEvento;
+	}
+
+	public void setOcorrenciaEvento(String ocorrenciaEvento) {
+		this.ocorrenciaEvento = ocorrenciaEvento;
 	}
 	
 
