@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8 />
+	<title>Ocorr�ncias</title>
+</h:head>
+
+
+
+<h:body style="background-color:#B0E0E6;font-size:10px;">
+
+
+
+
+	<p:growl id="avisoRetorno" />
+
+
+	<p:tabMenu activeIndex="#{param.i}">
+
+		<p:menuitem value="Ocorrencias" outcome="/Manter/ManterOcorrencias">
+			<f:param name="i" value="0" />
+		</p:menuitem>
+
+		<p:menuitem value="Colaboradores" outcome="/Manter/ManterFuncionario">
+			<f:param name="i" value="1" />
+		</p:menuitem>
+
+
+	</p:tabMenu>
+
+
+
+
+
+
+	<h:form id="cabecalho">
+
+
+
+
+		<h:panelGrid columns="4" cellpadding="3">
+
+
+			<p:commandButton id="modalDialogButton" value="Nova Ocorr�ncia"
+				action="#{ocorrencia.novo}" onclick="inserirDialog.show()"
+				update=":formTabelaOcorrencia:datatableOcorrencia,:formInserirOcorrencia:modalDialog"
+				type="button" icon="ui-icon-extlink" />
+
+
+
+
+			<p:commandButton value="Logout" action="#{login.realizarLogout()}"
+				style="float:right;"></p:commandButton>
+
+
+		</h:panelGrid>
+
+
+	</h:form>
+
+
+
+
+
+
+
+	<h:form id="formTabelaOcorrencia">
+
+
+
+		<p:messages id="messages" autoUpdate="true" closable="true" />
+
+		<p:dataTable id="datatableOcorrencia" var="lista"
+			value="#{ocorrencia.listaOcorrencia}"
+			emptyMessage="Dados n�o encontrados" paginator="true" rows="10">
+
+
+			<p:column headerText="Tecnologia" style="text-align: center">
+
+				<h:outputText value="#{lista.tecnologia}"></h:outputText>
+
+			</p:column>
+
+
+			<p:column id="Ambiente" headerText="Ambiente"
+				style="text-align: center">
+
+				<h:outputText value="#{lista.ambiente}"></h:outputText>
+
+			</p:column>
+
+			<p:column headerText="Equipe" style="text-align: center">
+
+				<h:outputText value="#{lista.equipe}"></h:outputText>
+
+			</p:column>
+
+
+			<p:column headerText="Descri��o" style="text-align: center">
+
+				<h:outputText value="#{lista.descricao}"></h:outputText>
+
+			</p:column>
+
+
+
+			<p:column headerText="A��o" style="text-align: center">
+
+				<p:commandButton icon="ui-icon-arrowrefresh-1-w"
+					onclick="alterarDialog.show()"
+					update=":formAlterarOcorrencia:panelAlterar,:formAlterarOcorrencia:panelDescAlterar,:formAlterarOcorrencia:panelDatasAlterar">
+
+					<f:setPropertyActionListener value="#{lista}"
+						target="#{Ocorrencia.OcorrenciaPOJO}" />
+				</p:commandButton>
+
+
+
+
+				<p:commandButton styleClass="ui-priority-primary"
+					icon="ui-icon-close" onclick="confirmation.show()">
+
+
+					<f:setPropertyActionListener value="#{lista}"
+						target="#{Ocorrencia.OcorrenciaPOJO}" />
+
+				</p:commandButton>
+
+
+				<p:commandButton value="Ocorr�ncias"
+					action="#{Ocorrencia.redirecionarCenario}"
+					update=":formAlterarOcorrencia:panelAlterar,:formAlterarOcorrencia:panelDescAlterar,:formAlterarOcorrencia:panelDatasAlterar">
+
+					<f:setPropertyActionListener value="#{lista}"
+						target="#{Ocorrencia.OcorrenciaPOJO}" />
+				</p:commandButton>
+
+
+				<p:commandButton value="Relat�rios"
+					action="#{Ocorrencia.redirecionarRelatorio}"
+					update=":formAlterarOcorrencia:panelAlterar,:formAlterarOcorrencia:panelDescAlterar,:formAlterarOcorrencia:panelDatasAlterar">
+
+					<f:setPropertyActionListener value="#{lista}"
+						target="#{Ocorrencia.OcorrenciaPOJO}" />
+				</p:commandButton>
+
+			</p:column>
+
+
+
+
+		</p:dataTable>
+
+
+
+
+
+
+
+
+		<!-- 
+		
+
+		Form utilizado para inserir nova ocorrencia
+
+		 -->
+
+
+
+		<h:form id="formInserirOcorrencia" prependId="false">
+
+			<p:dialog id="modalDialog" header="Nova Ocorrencia"
+				widgetVar="inserirDialog" modal="true">
+
+
+
+				<h:panelGrid id="panel" columns="2" cellpadding="2">
+
+
+
+
+					<h:outputLabel value="Tipo: *" for="tipo"></h:outputLabel>
+
+
+
+
+					<p:selectOneMenu id="tipo"
+						value="#{ocorrencia.ocorrenciaPOJO.tipo}">
+						<f:selectItem itemLabel=" " itemValue=" " />
+						<f:selectItem itemLabel="Incidente" itemValue="Incidente" />
+						<f:selectItem itemLabel="Alerta" itemValue="Alerta" />
+
+
+
+						<f:validateLength minimum="2">
+						</f:validateLength>
+					</p:selectOneMenu>
+
+
+
+
+
+
+
+				</h:panelGrid>
+
+
+
+
+				<h:panelGrid columns="1" id="panelDesc">
+
+
+
+					<h:outputLabel value="Descri��o: *" for="descricao"></h:outputLabel>
+
+
+
+
+
+
+					<p:inputTextarea value="#{ocorrencia.ocorrenciaPOJO.descricao}"
+						rows="4" cols="70" maxlength="200" autoResize="false"
+						id="descricao">
+
+						<f:validateLength minimum="5" />
+					</p:inputTextarea>
+
+
+
+
+					<div align="center">
+
+						<h:panelGrid columns="2" cellspacing="3">
+
+							<p:commandButton action="#{Ocorrencia.inserirOcorrencia()}"
+								value="Inserir" oncomplete="inserirDialog.hide()"
+								update=":formTabelaOcorrencia:datatableOcorrencia,:formInserirOcorrencia:modalDialog">
+
+
+							</p:commandButton>
+
+							<p:commandButton value="Limpar" action="#{Ocorrencia.limparTudo()}"
+								update=":formAlterarOcorrencia:panelAlterar,:formAlterarOcorrencia:panelDescAlterar,:formAlterarOcorrencia:panelDatasAlterar">
+
+
+							</p:commandButton>
+
+						</h:panelGrid>
+					</div>
+			</p:dialog>
+
+
+		</h:form>
+</h:body>
+
+
+
+</html>
