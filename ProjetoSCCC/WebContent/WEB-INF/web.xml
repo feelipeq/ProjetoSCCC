@@ -11,13 +11,14 @@
     <url-pattern>/faces/*</url-pattern>
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
-  
+    
   <filter>
-  	<filter-name>Login</filter-name>
+  	<filter-name>login</filter-name>
   	<filter-class>br.projetos.sccc.filter.LoginFilter</filter-class>
   </filter>
   <filter-mapping>
-  	<filter-name>Login</filter-name>
+  	<filter-name>login</filter-name>
   	<url-pattern>/Manter/*</url-pattern>
   </filter-mapping>
+
 </web-app>
