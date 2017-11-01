@@ -22,10 +22,10 @@ public class OcorrenciaDAO extends DAO {
 
 				OcorrenciaPOJO ocorrencia = new OcorrenciaPOJO();
 
-				ocorrencia.setID(rs.getString("id"));
+				ocorrencia.setID(rs.getInt("id"));
 				ocorrencia.setDescricao(rs.getString("descricao"));
 				ocorrencia.setTipo(rs.getString("tipo"));
-				ocorrencia.setOcorrenciaEvento(rs.getString("ocorrenciaEvento"));
+				ocorrencia.setOcorrenciaEvento(rs.getInt("ocorrenciaEvento"));
 
 				listaOcorrencia.add(ocorrencia);
 			}
@@ -41,6 +41,45 @@ public class OcorrenciaDAO extends DAO {
 		}
 
 		return listaOcorrencia;
+	}
+
+	public String inserir(OcorrenciaPOJO ocorrenciaPOJO) {
+		
+		
+				String retorno = "Ocorrência " + ocorrenciaPOJO.getID()
+		+ " inserido com sucesso!";
+try {
+
+	abreConexao();
+	st = cn.prepareStatement("INSERT INTO tb_ocorrencia (id, tipo, ocorrenciaEvento, descricao) VALUES (?,?,?,?)");
+	st.setInt(1, ocorrenciaPOJO.getID());
+	st.setString(2, ocorrenciaPOJO.getTipo());
+	st.setInt(3, ocorrenciaPOJO.getOcorrenciaEvento());
+
+	st.setString(4, ocorrenciaPOJO.getDescricao());
+
+	
+	st.execute();
+
+} catch (Exception e) {
+
+	retorno = e.getMessage();
+
+} finally {
+
+	try {
+		fecharConexao();
+	} catch (Exception e) {
+
+		retorno = e.getMessage();
+	}
+}
+
+System.out.println(retorno);
+
+return retorno;
+
+
 	}
 
 	}

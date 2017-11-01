@@ -3,22 +3,15 @@ package br.projetos.sccc.pojo;
 public class OcorrenciaPOJO {
 	
 	
-	private String ID;
+	private Integer ID;
 	private String tipo;
 	private String descricao;
-	private String ocorrenciaEvento;
+	private Integer ocorrenciaEvento;
 	
 	
 	
 	
-	public String getID() {
-		return ID;
-	}
-	
-	public void setID(String iD) {
-		ID = iD;
-	}
-	
+
 	
 	public String getTipo() {
 		return tipo;
@@ -36,13 +29,21 @@ public class OcorrenciaPOJO {
 		this.descricao = descricao;
 	}
 
-	public String getOcorrenciaEvento() {
+	public Integer getOcorrenciaEvento() {
 		return ocorrenciaEvento;
 	}
 
-	public void setOcorrenciaEvento(String ocorrenciaEvento) {
+	public void setOcorrenciaEvento(Integer ocorrenciaEvento) {
 		this.ocorrenciaEvento = ocorrenciaEvento;
 	}
-	
+
+	public Integer getID() {
+		return ID;
+	}
+
+	public void setID(Integer iD) {
+		ID = iD;
+	}
+
 
 }

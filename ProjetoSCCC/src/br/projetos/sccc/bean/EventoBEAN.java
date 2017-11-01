@@ -154,6 +154,9 @@ public class EventoBEAN implements Serializable {
 			session.setAttribute("ID_EVENTO", this.eventoPOJO);
 			
 			System.out.println( "ID do evento " + this.eventoPOJO.getId());
+			System.out.println("Evento: " + this.eventoPOJO.getAmbiente());
+			
+			addMessage("Tabela de Ocorrências: " + this.eventoPOJO.getAmbiente());
 			
 			return "/Manter/ManterOcorrencia";
 		}

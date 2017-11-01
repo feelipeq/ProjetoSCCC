@@ -32,43 +32,43 @@
 		<p:menuitem value="Colaboradores" outcome="/Manter/ManterFuncionario">
 			<f:param name="i" value="1" />
 		</p:menuitem>
-	
+
 
 	</p:tabMenu>
 
 
 
-	
-
-
-		<h:form id="cabecalho">
 
 
 
-
-			<h:panelGrid columns="4" cellpadding="3">
-
-
-					<p:commandButton id="modalDialogButton" value="Novo Evento"
-						action="#{evento.novo}" onclick="inserirDialog.show()"
-						update=":formTabelaEvento:datatableEvento,:formInserirEvento:modalDialog"
-						type="button" icon="ui-icon-extlink" />
+	<h:form id="cabecalho">
 
 
 
 
-					<p:commandButton value="Logout" action="#{login.realizarLogout()}"
-						style="float:right;" ></p:commandButton>
+		<h:panelGrid columns="4" cellpadding="3">
 
 
-			</h:panelGrid>
+			<p:commandButton id="modalDialogButton" value="Novo Evento"
+				action="#{evento.novo}" onclick="inserirDialog.show()"
+				update=":formTabelaEvento:datatableEvento,:formInserirEvento:modalDialog"
+				type="button" icon="ui-icon-extlink" />
 
 
-		</h:form>
+
+
+			<p:commandButton value="Logout" action="#{login.realizarLogout()}"
+				style="float:right;"></p:commandButton>
+
+
+		</h:panelGrid>
+
+
+	</h:form>
 
 
 
-	
+
 
 
 
@@ -90,7 +90,8 @@
 			</p:column>
 
 
-			<p:column id="Ambiente" headerText="Ambiente" style="text-align: center">
+			<p:column id="Ambiente" headerText="Ambiente"
+				style="text-align: center">
 
 				<h:outputText value="#{lista.ambiente}"></h:outputText>
 
@@ -102,18 +103,33 @@
 
 			</p:column>
 
-			
-			<p:column headerText="Descrição" style="text-align: center">
+
+			<p:column headerText="Descrição" style="text-align: center; width:650px" >
 
 				<h:outputText value="#{lista.descricao}"></h:outputText>
 
 			</p:column>
 
+
+			<p:column headerText="Status" style="text-align: center">
+
+				<h:outputText value="#{lista.status}"></h:outputText>
+
+			</p:column>
 			
+			<p:column headerText="Data de Abertura" style="text-align: center">
+
+				<h:outputText value="#{lista.dataAbertura}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+
+			</p:column>
+
+
 
 			<p:column headerText="Ação" style="text-align: center">
 
-				<p:commandButton icon="ui-icon-arrowrefresh-1-w"
+				<p:commandButton icon="ui-icon-arrowrefresh-1-w" style="font-size:10px;"
 					onclick="alterarDialog.show()"
 					update=":formAlterarEvento:panelAlterar,:formAlterarEvento:panelDescAlterar,:formAlterarEvento:panelDatasAlterar">
 
@@ -124,7 +140,7 @@
 
 
 
-				<p:commandButton styleClass="ui-priority-primary"
+				<p:commandButton styleClass="ui-priority-primary" style="font-size:10px;"
 					icon="ui-icon-close" onclick="confirmation.show()">
 
 
@@ -134,7 +150,7 @@
 				</p:commandButton>
 
 
-				<p:commandButton value="Ocorrências"
+				<p:commandButton value="Ocorrências" style="font-size:10px;"
 					action="#{evento.redirecionarOcorrencia}"
 					update=":formAlterarEvento:panelAlterar,:formAlterarEvento:panelDescAlterar,:formAlterarEvento:panelDatasAlterar">
 
@@ -143,12 +159,12 @@
 				</p:commandButton>
 
 
-				<p:commandButton value="Relatórios"
+				<p:commandButton value="Relatórios" style="font-size:10px;"
 					action="#{evento.redirecionarRelatorio}"
 					update=":formAlterarEvento:panelAlterar,:formAlterarEvento:panelDescAlterar,:formAlterarEvento:panelDatasAlterar">
 
 					<f:setPropertyActionListener value="#{lista}"
-						target="#{evento.EventoPOJO}" />
+						target="#{evento.eventoPOJO}" />
 				</p:commandButton>
 
 			</p:column>
@@ -173,8 +189,7 @@
 
 				<p:commandButton id="confirm" value="Sim"
 					oncomplete="confirmation.hide()"
-					actionListener="#{evento.deletarEvento()}"
-					update="datatableEvento">
+					actionListener="#{evento.deletarEvento()}" update="datatableEvento">
 				</p:commandButton>
 
 				<p:commandButton id="decline" value="Não"
@@ -230,7 +245,8 @@
 
 
 
-				<p:selectOneMenu id="tecnologia" value="#{evento.eventoPOJO.tecnologia}">
+				<p:selectOneMenu id="tecnologia"
+					value="#{evento.eventoPOJO.tecnologia}">
 					<f:selectItem itemLabel=" " itemValue=" " />
 					<f:selectItem itemLabel="WAS" itemValue="WAS" />
 					<f:selectItem itemLabel="MQ" itemValue="MQ" />
@@ -242,7 +258,7 @@
 					<f:selectItem itemLabel="BD SQL" itemValue="SQL" />
 					<f:selectItem itemLabel="BD Informix" itemValue="SQL" />
 
-					
+
 					<f:validateLength minimum="2">
 					</f:validateLength>
 				</p:selectOneMenu>
@@ -256,13 +272,15 @@
 					required="true" label="ambiente">
 					<f:validateLength minimum="4" />
 				</p:inputText>
-				
-			<h:outputLabel value="Equipe Responsável *" for="equiperesponsavel"></h:outputLabel>
-				<p:selectOneMenu id="equiperesponsavel" value="#{evento.eventoPOJO.equipe}">
+
+				<h:outputLabel value="Equipe Responsável *" for="equiperesponsavel"></h:outputLabel>
+				<p:selectOneMenu id="equiperesponsavel"
+					value="#{evento.eventoPOJO.equipe}">
 					<f:selectItem itemLabel=" " itemValue=" " />
 					<f:selectItem itemLabel="Coord TI Vida" itemValue="Coord TI Vida" />
 					<f:selectItem itemLabel="Coord TI Auto" itemValue="Coord TI Auto" />
-					<f:selectItem itemLabel="Coord TI RE CONSORCIO E TRANSP" itemValue="Coord TI RE CONSORCIO E TRANSP" />
+					<f:selectItem itemLabel="Coord TI RE CONSORCIO E TRANSP"
+						itemValue="Coord TI RE CONSORCIO E TRANSP" />
 
 					<f:validateLength minimum="4">
 					</f:validateLength>
@@ -322,7 +340,7 @@
 				</p:calendar>
 
 
-			
+
 				<h:outputLabel value="Status: *" for="status"></h:outputLabel>
 
 
@@ -330,14 +348,15 @@
 					<f:selectItem itemLabel=" " itemValue=" " />
 					<f:selectItem itemLabel="Em Tratativa" itemValue="Em Tratativa" />
 					<f:selectItem itemLabel="Concluído" itemValue="Concluído" />
-					<f:selectItem itemLabel="Em Acompanhamento" itemValue="Em Acompanhamento" />
-		
+					<f:selectItem itemLabel="Em Acompanhamento"
+						itemValue="Em Acompanhamento" />
+
 					<f:validateLength minimum="6"></f:validateLength>
 
 
 				</p:selectOneMenu>
 
-			
+
 
 			</h:panelGrid>
 
@@ -391,7 +410,7 @@
 
 
 
-<h:form id="formAlterarEvento" prependId="false">
+	<h:form id="formAlterarEvento" prependId="false">
 
 		<p:dialog id="modalDialogAlterar" header="Alterar Evento"
 			widgetVar="alterarDialog" modal="true">
@@ -408,7 +427,8 @@
 
 
 
-				<p:selectOneMenu id="tecnologiaAlterar" value="#{evento.eventoPOJO.tecnologia}">
+				<p:selectOneMenu id="tecnologiaAlterar"
+					value="#{evento.eventoPOJO.tecnologia}">
 					<f:selectItem itemLabel=" " itemValue=" " />
 					<f:selectItem itemLabel="WAS" itemValue="WAS" />
 					<f:selectItem itemLabel="MQ" itemValue="MQ" />
@@ -429,17 +449,21 @@
 
 
 				<h:outputLabel value="Ambiente: *" for="ambienteAlterar"></h:outputLabel>
-				<p:inputText id="ambienteAlterar" value="#{evento.eventoPOJO.ambiente}"
-					required="true" label="ambiente">
+				<p:inputText id="ambienteAlterar"
+					value="#{evento.eventoPOJO.ambiente}" required="true"
+					label="ambiente">
 					<f:validateLength minimum="4" />
 				</p:inputText>
-				
-			<h:outputLabel value="Equipe Responsável *" for="equiperesponsavelAlterar"></h:outputLabel>
-				<p:selectOneMenu id="equiperesponsavelAlterar" value="#{evento.eventoPOJO.equipe}">
+
+				<h:outputLabel value="Equipe Responsável *"
+					for="equiperesponsavelAlterar"></h:outputLabel>
+				<p:selectOneMenu id="equiperesponsavelAlterar"
+					value="#{evento.eventoPOJO.equipe}">
 					<f:selectItem itemLabel=" " itemValue=" " />
 					<f:selectItem itemLabel="Coord TI Vida" itemValue="Coord TI Vida" />
 					<f:selectItem itemLabel="Coord TI Auto" itemValue="Coord TI Auto" />
-					<f:selectItem itemLabel="Coord TI RE CONSORCIO E TRANSP" itemValue="Coord TI RE CONSORCIO E TRANSP" />
+					<f:selectItem itemLabel="Coord TI RE CONSORCIO E TRANSP"
+						itemValue="Coord TI RE CONSORCIO E TRANSP" />
 
 					<f:validateLength minimum="4">
 					</f:validateLength>
@@ -448,8 +472,9 @@
 
 				<h:outputLabel value="Contato: *" for="contatoAlterar"></h:outputLabel>
 
-				<p:inputText id="contatoAlterar" value="#{evento.eventoPOJO.contato}"
-					required="true" label="nome" size="30">
+				<p:inputText id="contatoAlterar"
+					value="#{evento.eventoPOJO.contato}" required="true" label="nome"
+					size="30">
 					<f:validateLength minimum="5" />
 				</p:inputText>
 
@@ -499,22 +524,24 @@
 				</p:calendar>
 
 
-			
+
 				<h:outputLabel value="Status: *" for="statusAlterar"></h:outputLabel>
 
 
-				<p:selectOneMenu id="statusAlterar" value="#{evento.eventoPOJO.status}">
+				<p:selectOneMenu id="statusAlterar"
+					value="#{evento.eventoPOJO.status}">
 					<f:selectItem itemLabel=" " itemValue=" " />
 					<f:selectItem itemLabel="Em Tratativa" itemValue="Em Tratativa" />
 					<f:selectItem itemLabel="Concluído" itemValue="Concluído" />
-					<f:selectItem itemLabel="Em Acompanhamento" itemValue="Em Acompanhamento" />
-		
+					<f:selectItem itemLabel="Em Acompanhamento"
+						itemValue="Em Acompanhamento" />
+
 					<f:validateLength minimum="6"></f:validateLength>
 
 
 				</p:selectOneMenu>
 
-			
+
 
 			</h:panelGrid>
 

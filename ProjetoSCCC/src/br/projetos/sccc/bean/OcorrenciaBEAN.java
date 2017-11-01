@@ -11,7 +11,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 
-
 import br.projetos.sccc.dao.OcorrenciaDAO;
 import br.projetos.sccc.pojo.EventoPOJO;
 import br.projetos.sccc.pojo.OcorrenciaPOJO;
@@ -27,6 +26,15 @@ public class OcorrenciaBEAN implements Serializable{
 	private OcorrenciaPOJO ocorrenciaPOJO;
 	private EventoPOJO eventoPOJO;
 	private List<OcorrenciaPOJO> listaOcorrencia;
+	
+	
+	
+	public OcorrenciaBEAN(){
+		
+		setOcorrenciaPOJO(new OcorrenciaPOJO());
+		
+	}
+	
 
 
 
@@ -36,6 +44,7 @@ public class OcorrenciaBEAN implements Serializable{
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
 		this.eventoPOJO = (EventoPOJO) session.getAttribute("ID_EVENTO");
+		
 
 		return eventoPOJO;
 		
@@ -85,6 +94,26 @@ public class OcorrenciaBEAN implements Serializable{
 	public void setOcorrenciaPOJO(OcorrenciaPOJO ocorrenciaPOJO) {
 		this.ocorrenciaPOJO = ocorrenciaPOJO;
 	}
+	
+	
+	
+	public void inserirOcorrencia() {
+		
+		System.out.println("Chegamos no inserir ocorrencia" + this.eventoPOJO.getId());
+
+		ocorrenciaPOJO.setOcorrenciaEvento(this.eventoPOJO.getId());
+
+			OcorrenciaDAO dao = new OcorrenciaDAO();
+
+	
+		String retorno = dao.inserir(ocorrenciaPOJO);
+		
+
+		addMessage(retorno);
+
+	}
+	
+	
 
 
 }
