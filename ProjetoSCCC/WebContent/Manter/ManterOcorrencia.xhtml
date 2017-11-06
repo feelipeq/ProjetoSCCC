@@ -109,24 +109,27 @@
 			<p:column headerText="Ação" style="text-align: center">
 
 				<p:commandButton icon="ui-icon-arrowrefresh-1-w"
-					onclick="alterarDialog.show()"
+					onclick="AlterarDialog.show()"
 					update=":formAlterarOcorrencia:panelAlterar,:formAlterarOcorrencia:panelDescAlterar">
 
 					<f:setPropertyActionListener value="#{lista}"
 						target="#{ocorrencia.ocorrenciaPOJO}" />
+						
 				</p:commandButton>
 
 
 
 
-				<p:commandButton styleClass="ui-priority-primary"
+
+
+				<!--  <p:commandButton styleClass="ui-priority-primary"
 					icon="ui-icon-close" onclick="confirmation.show()">
 
 
 					<f:setPropertyActionListener value="#{lista}"
 						target="#{ocorrencia.ocorrenciaPOJO}" />
 
-				</p:commandButton>
+				</p:commandButton>  -->
 
 
 			</p:column>
@@ -135,16 +138,119 @@
 
 
 	</h:form>
+	
+	
+	
+	
+
+	<!-- Alterar Ocorrencia -->
 
 
 
 
-	<!-- 
-		
+
+	<h:form id="formAlterarOcorrencia" prependId="false">
+
+		<p:dialog id="modalDialogAlterar" header="Nova Ocorrencia"
+			widgetVar="AlterarDialog" modal="true">
+
+
+
+			<h:panelGrid id="panelAlterar" columns="4" cellpadding="2">
+
+
+
+
+				<h:outputLabel value="Tipo: *" for="tipoAlterar"></h:outputLabel>
+
+
+
+
+				<p:selectOneMenu id="tipoAlterar"
+					value="#{ocorrencia.ocorrenciaPOJO.tipo}">
+					<f:selectItem itemLabel=" " itemValue=" " />
+					<f:selectItem itemLabel="Incidente" itemValue="Incidente" />
+					<f:selectItem itemLabel="Alerta" itemValue="Alerta" />
+
+
+
+					<f:validateLength minimum="2">
+					</f:validateLength>
+				</p:selectOneMenu>
+
+
+
+
+
+				<h:outputLabel value="Número: *" for="numeroAlterar"></h:outputLabel>
+
+
+				<p:inputTextarea value="#{ocorrencia.ocorrenciaPOJO.ID}" rows="4"
+					cols="70" maxlength="15" autoResize="false" id="numeroAlterar"  size="15">
+
+					<f:validateLength minimum="5" />
+				</p:inputTextarea>
+
+
+
+
+			</h:panelGrid>
+
+
+
+
+			<h:panelGrid columns="1" id="panelDescAlterar">
+
+
+
+				<h:outputLabel value="Descrição: *" for="descricaoAlterar"></h:outputLabel>
+
+
+
+
+
+
+				<p:inputTextarea value="#{ocorrencia.ocorrenciaPOJO.descricao}"
+					rows="4" cols="70" maxlength="200" autoResize="false"
+					id="descricaoAlterar">
+
+					<f:validateLength minimum="5" />
+				</p:inputTextarea>
+
+
+			</h:panelGrid>
+
+			<div align="center">
+
+				<h:panelGrid columns="2" cellspacing="3">
+
+					<p:commandButton action="#{ocorrencia.alterarOcorrencia()}"
+						value="Alterar" oncomplete="AlterarDialog.hide()"
+						update=":formTabelaOcorrencia:datatableOcorrencia,:formAlterarOcorrencia:modalDialogAlterar">
+
+
+					</p:commandButton>
+
+					<p:commandButton value="Limpar"
+						action="#{ocorrencia.limparOcorrencia()}"
+						update=":formAlterarOcorrencia:panelAlterar,:formAlterarOcorrencia:panelDescAlterar">
+
+
+					</p:commandButton>
+
+				</h:panelGrid>
+			</div>
+		</p:dialog>
+
+
+	</h:form>
+	
+	
+	
+		<!-- 
 
 		Form utilizado para inserir nova ocorrencia
-
-		 -->
+ -->
 
 
 
@@ -190,7 +296,7 @@
 					<f:validateLength minimum="5" />
 				</p:inputText>
 
-			
+
 
 
 
@@ -232,116 +338,8 @@
 
 					</p:commandButton>
 
-					<p:commandButton value="Limpar" action="#{ocorrencia.limparTudo()}"
-						update=":formAlterarOcorrencia:panelAlterar,:formAlterarOcorrencia:panelDescAlterar">
-
-
-					</p:commandButton>
-
-				</h:panelGrid>
-			</div>
-		</p:dialog>
-
-
-	</h:form>
-
-
-
-
-
-
-
-
-	<!-- Alterar Ocorrencia -->
-
-
-
-
-
-	<h:form id="formAlterarOcorrencia" prependId="false">
-
-		<p:dialog id="modalDialogAlterar" header="Nova Ocorrencia"
-			widgetVar="AlterarDialog" modal="true">
-
-
-
-			<h:panelGrid id="panelAlterar" columns="4" cellpadding="2">
-
-
-
-
-				<h:outputLabel value="Tipo: *" for="tipoAlterar"></h:outputLabel>
-
-
-
-
-				<p:selectOneMenu id="tipoAlterar"
-					value="#{ocorrencia.ocorrenciaPOJO.tipo}">
-					<f:selectItem itemLabel=" " itemValue=" " />
-					<f:selectItem itemLabel="Incidente" itemValue="Incidente" />
-					<f:selectItem itemLabel="Alerta" itemValue="Alerta" />
-
-
-
-					<f:validateLength minimum="2">
-					</f:validateLength>
-				</p:selectOneMenu>
-
-
-
-
-
-				<h:outputLabel value="Número: *" for="numeroAlterar"></h:outputLabel>
-
-
-				<p:inputTextarea value="#{ocorrencia.ocorrenciaPOJO.ID}"
-					rows="4" cols="70" maxlength="15" autoResize="false"
-					id="numeroAlterar">
-
-					<f:validateLength minimum="5" />
-				</p:inputTextarea>
-
-
-
-
-			</h:panelGrid>
-
-
-
-
-			<h:panelGrid columns="1" id="panelDescAlterar">
-
-
-
-				<h:outputLabel value="Descrição: *" for="descricaoAlterar"></h:outputLabel>
-
-
-
-
-
-
-				<p:inputTextarea value="#{ocorrencia.ocorrenciaPOJO.descricao}"
-					rows="4" cols="70" maxlength="200" autoResize="false"
-					id="descricaoAlterar">
-
-					<f:validateLength minimum="5" />
-				</p:inputTextarea>
-
-
-			</h:panelGrid>
-
-			<div align="center">
-
-				<h:panelGrid columns="2" cellspacing="3">
-
-					<p:commandButton action="#{ocorrencia.AlterarOcorrencia()}"
-						value="Alterar" oncomplete="AlterarDialog.hide()"
-						update=":formTabelaOcorrencia:datatableOcorrencia,:formAlterarOcorrencia:modalDialogAlterar">
-
-
-					</p:commandButton>
-
-					<p:commandButton value="Limpar" action="#{ocorrencia.limparTudo()}"
+					<p:commandButton value="Limpar"
+						action="#{ocorrencia.inserirOcorrencia()}"
 						update=":formAlterarOcorrencia:panelAlterar,:formAlterarOcorrencia:panelDescAlterar">
 
 

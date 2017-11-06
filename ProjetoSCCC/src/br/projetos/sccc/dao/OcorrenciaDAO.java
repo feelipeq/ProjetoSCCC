@@ -81,6 +81,47 @@ return retorno;
 
 
 	}
+	
+	
+	
+	
+	
+	public String alterarOcorrencia(OcorrenciaPOJO ocorrencia) {
+
+		String retorno = "Ocorrência: " +" " + ocorrencia.getID()+ " "+ " atualizado com sucesso!";
+	
+
+		try {
+
+			abreConexao();
+			st = cn.prepareStatement("UPDATE tb_ocorrencia SET ID = ?, tipo = ?, descricao = ? WHERE ocorrenciaEvento = ? ");
+			st.setInt(1, ocorrencia.getID());
+			st.setString(2, ocorrencia.getTipo());
+			st.setString(3, ocorrencia.getDescricao());
+						
+			st.setInt(4, ocorrencia.getOcorrenciaEvento());
+
+			st.execute();
+			
+			System.out.println("Ocorrencia do Evento" + ocorrencia.getOcorrenciaEvento());
+
+		} catch (Exception e) {
+
+			retorno = e.getMessage();
+
+		} finally {
+
+			try {
+				fecharConexao();
+			} catch (Exception e) {
+
+				retorno = e.getMessage();
+			}
+		}
+
+		return retorno;
+
+	}
 
 	}
 	

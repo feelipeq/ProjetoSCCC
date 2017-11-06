@@ -84,7 +84,8 @@ public class OcorrenciaBEAN implements Serializable{
 	
 	public void novo() {
 		
-		setOcorrenciaPOJO(new OcorrenciaPOJO());
+		ocorrenciaPOJO = new OcorrenciaPOJO();
+	
 	}
 
 	public OcorrenciaPOJO getOcorrenciaPOJO() {
@@ -113,6 +114,20 @@ public class OcorrenciaBEAN implements Serializable{
 
 	}
 	
+	
+	
+	public void alterarOcorrencia() {
+
+		OcorrenciaDAO dao = new OcorrenciaDAO();
+
+		String retorno = dao.alterarOcorrencia(this.ocorrenciaPOJO);
+
+		this.ocorrenciaPOJO = new OcorrenciaPOJO();
+
+		addMessage(retorno);
+	
+		
+	}
 	
 
 
