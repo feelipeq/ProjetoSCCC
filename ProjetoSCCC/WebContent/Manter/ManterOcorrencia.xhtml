@@ -156,14 +156,12 @@
 
 
 
-			<h:panelGrid id="panelAlterar" columns="4" cellpadding="2">
+			<h:panelGrid id="panelAlterar" columns="4" cellpadding="4">
 
 
 
 
 				<h:outputLabel value="Tipo: *" for="tipoAlterar"></h:outputLabel>
-
-
 
 
 				<p:selectOneMenu id="tipoAlterar"
@@ -185,11 +183,11 @@
 				<h:outputLabel value="Número: *" for="numeroAlterar"></h:outputLabel>
 
 
-				<p:inputTextarea value="#{ocorrencia.ocorrenciaPOJO.ID}" rows="4"
-					cols="70" maxlength="15" autoResize="false" id="numeroAlterar"  size="15">
+				<p:inputText value="#{ocorrencia.ocorrenciaPOJO.ID}" 
+					  id="numeroAlterar" size="15">
 
 					<f:validateLength minimum="5" />
-				</p:inputTextarea>
+				</p:inputText>
 
 
 
