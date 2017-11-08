@@ -78,24 +78,33 @@
 
 		<p:messages id="messages" autoUpdate="true" closable="true" />
 
-		<p:dataTable id="datatableEvento" var="lista"
+		<p:dataTable id="datatableEvento" var="lista" widgetVar="eventoTable"
 			value="#{evento.listaEvento}" emptyMessage="Dados não encontrados"
 			paginator="true" rows="10">
+			
+			
+  			<p:column filterBy="#{lista.tecnologia}" headerText="Tecnologia" style="text-align: center">
+	            <f:facet name="filter">
+	                <p:selectOneMenu >
+	                    <f:selectItem itemLabel="Selecione a tecnologia" itemValue="#{null}" noSelectionOption="true"  />
+	                    <f:selectItems value="#{lista.tecnologia}" />
+	                </p:selectOneMenu>
+	            </f:facet>
+	           <h:outputText value="#{lista.tecnologia}"></h:outputText>
+        	</p:column>
+			
+        	
+			
+	  		<p:column filterBy="#{lista.ambiente}" headerText="Ambiente" style="text-align: center">
+	            <f:facet name="filter">
+	                <p:selectOneMenu >
+	                    <f:selectItem itemLabel="Selecione o ambiente" itemValue="#{null}" noSelectionOption="true"  />
+	                    <f:selectItems value="#{lista.ambiente}" />
+	                </p:selectOneMenu>
+	            </f:facet>
+	        	<h:outputText value="#{lista.ambiente}"></h:outputText>
+     		</p:column>
 
-
-			<p:column headerText="Tecnologia" style="text-align: center">
-
-				<h:outputText value="#{lista.tecnologia}"></h:outputText>
-
-			</p:column>
-
-
-			<p:column id="Ambiente" headerText="Ambiente"
-				style="text-align: center">
-
-				<h:outputText value="#{lista.ambiente}"></h:outputText>
-
-			</p:column>
 
 			<p:column headerText="Equipe" style="text-align: center">
 
@@ -104,11 +113,17 @@
 			</p:column>
 
 
-			<p:column headerText="Descrição" style="text-align: center; width:650px" >
-
-				<h:outputText value="#{lista.descricao}"></h:outputText>
-
-			</p:column>
+	
+			
+			<p:column filterBy="#{lista.descricao}" headerText="Descrição" style="text-align: center; width:650px">
+	            <f:facet name="filter">
+	                <p:selectOneMenu >
+	                    <f:selectItem itemLabel="Pesquise a Descrição" itemValue="#{null}" noSelectionOption="true"  />
+	                    <f:selectItems value="#{lista.descricao}" />
+	                </p:selectOneMenu>
+	            </f:facet>
+	        	<h:outputText value="#{lista.descricao}"></h:outputText>
+     		</p:column>
 
 
 			<p:column headerText="Status" style="text-align: center">
@@ -243,7 +258,7 @@
 					<f:selectItem itemLabel=" " itemValue=" " />
 					<f:selectItem itemLabel="WAS" itemValue="WAS" />
 					<f:selectItem itemLabel="MQ" itemValue="MQ" />
-					<f:selectItem itemLabel=".NET" itemValue=".NET" />
+					<f:selectItem itemLabel="DOTNET" itemValue="DOTNET" />
 					<f:selectItem itemLabel="Vignette" itemValue="SQL" />
 					<f:selectItem itemLabel="JBoss" itemValue="SQL" />
 					<f:selectItem itemLabel="SOA" itemValue="SQL" />
@@ -456,7 +471,7 @@
 					<f:selectItem itemLabel=" " itemValue=" " />
 					<f:selectItem itemLabel="WAS" itemValue="WAS" />
 					<f:selectItem itemLabel="MQ" itemValue="MQ" />
-					<f:selectItem itemLabel=".NET" itemValue=".NET" />
+					<f:selectItem itemLabel="DOTNET" itemValue="DOTNET" />
 					<f:selectItem itemLabel="Vignette" itemValue="SQL" />
 					<f:selectItem itemLabel="JBoss" itemValue="SQL" />
 					<f:selectItem itemLabel="SOA" itemValue="SQL" />
