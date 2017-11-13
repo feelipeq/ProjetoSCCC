@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.event.data.FilterEvent;
 
 import br.projetos.sccc.dao.OcorrenciaDAO;
 import br.projetos.sccc.pojo.EventoPOJO;
