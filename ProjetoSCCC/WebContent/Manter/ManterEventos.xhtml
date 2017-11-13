@@ -95,7 +95,7 @@
 			
         	
 			
-	  		<p:column filterBy="#{lista.ambiente}" headerText="Ambiente" style="text-align: center">
+	  		<p:column filterBy="#{lista.ambiente}" headerText="Ambiente" style="text-align: center" filterMatchMode="contains">
 	            <f:facet name="filter">
 	                <p:selectOneMenu >
 	                    <f:selectItem itemLabel="Selecione o ambiente" itemValue="#{null}" noSelectionOption="true"  />
@@ -115,7 +115,7 @@
 
 	
 			
-			<p:column filterBy="#{lista.descricao}" headerText="Descrição" style="text-align: center; width:650px">
+			<p:column filterBy="#{lista.descricao}" headerText="Descrição" style="text-align: center; width:650px" filterMatchMode="contains">
 	            <f:facet name="filter">
 	                <p:selectOneMenu >
 	                    <f:selectItem itemLabel="Pesquise a Descrição" itemValue="#{null}" noSelectionOption="true"  />
