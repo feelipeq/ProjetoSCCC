@@ -92,13 +92,11 @@
 	        </f:facet>
 				
 
-			<p:column headerText="Número" style="text-align: center" id="numero">
-
+			<p:column value="Numero" headerText="Número" style="text-align: center" id="numero">
 				<h:outputText value="#{lista.ID}"></h:outputText>
-
 			</p:column>
 
-	  		<p:column filterBy="#{lista.tipo}" headerText="Tipo" style="text-align: center">
+	  		<p:column filterBy="#{lista.tipo}" value="Tipo" headerText="Tipo" style="text-align: center">
 	            <f:facet name="filter">
 	                <p:selectOneMenu >
 	                    <f:selectItem itemLabel="Selecione o Tipo" itemValue="#{null}" noSelectionOption="true"  />
@@ -106,20 +104,19 @@
 	                </p:selectOneMenu>
 	            </f:facet>
 	        	<h:outputText value="#{lista.tipo}"></h:outputText>
-	        	
      		</p:column>
 
 
 			<p:column id="descricao" headerText="Descrição"
-				style="text-align: center">
-
+				style="text-align: center" value="Descricao">
+				
 				<h:outputText value="#{lista.descricao}"></h:outputText>
 
 			</p:column>
 
 
 
-			<p:column exportable="false" sheaderText="Editar" style="text-align: center">
+			<p:column  headerText="Editar" sheaderText="Editar" style="text-align: center" exportable="false">
 
 				<p:commandButton icon="ui-icon-arrowrefresh-1-w"
 					onclick="AlterarDialog.show()"
