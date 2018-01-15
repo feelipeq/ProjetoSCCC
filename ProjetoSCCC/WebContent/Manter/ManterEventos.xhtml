@@ -106,13 +106,21 @@
      		</p:column>
 
 
-			<p:column headerText="Equipe" style="text-align: center">
-
+		<!-- 	<p:column headerText="Equipe" style="text-align: center" >
+				
 				<h:outputText value="#{lista.equipe}"></h:outputText>
 
-			</p:column>
+			</p:column>  -->
 
-
+			<p:column filterBy="#{lista.equipe}" headerText="Equipe" style="text-align: center; width:250px" filterMatchMode="contains">
+	            <f:facet name="filter">
+	                <p:selectOneMenu >
+	                    <f:selectItem itemLabel="Pesquise a Equipe" itemValue="#{null}" noSelectionOption="true"  />
+	                    <f:selectItems value="#{lista.equipe}" />
+	                </p:selectOneMenu>
+	            </f:facet>
+	        	<h:outputText value="#{lista.equipe}"></h:outputText>
+     		</p:column>
 	
 			
 			<p:column filterBy="#{lista.descricao}" headerText="Descrição" style="text-align: center; width:650px" filterMatchMode="contains">
@@ -126,23 +134,36 @@
      		</p:column>
 
 
-			<p:column headerText="Status" style="text-align: center">
+		<!-- 	<p:column headerText="Status" style="text-align: center">
 
 				<h:outputText value="#{lista.status}"></h:outputText>
 
-			</p:column>
+			</p:column> -->
+	
+
+			<p:column filterBy="#{lista.status}" headerText="Status" style="text-align: center; width:80px" filterMatchMode="contains">
+	            <f:facet name="filter">
+	                <p:selectOneMenu >
+	                    <f:selectItem itemLabel="Pesquise por Status" itemValue="#{null}" noSelectionOption="true"  />
+	                    <f:selectItems value="#{lista.status}" />
+	                </p:selectOneMenu>
+	            </f:facet>
+	        	<h:outputText value="#{lista.status}"></h:outputText>
+     		</p:column>
 			
-			<p:column headerText="Data de Abertura" style="text-align: center">
+			
+			
+		 	<p:column headerText="Data de Abertura" style="text-align: center">
 
 				<h:outputText value="#{lista.dataAbertura}">
 					<f:convertDateTime pattern="dd/MM/yyyy" />
 				</h:outputText>
 
-			</p:column>
+			</p:column>  
 
 
 
-			<p:column headerText="Ação" style="text-align: center">
+			<p:column headerText="Ação" style="text-align: center" exportable="false">
 
 				<p:commandButton icon="ui-icon-arrowrefresh-1-w" style="font-size:10px;"
 					onclick="alterarDialog.show()"
@@ -177,7 +198,13 @@
 
 			</p:column>
 
- 
+ 			
+ 			<f:facet name="footer">
+	            <h:commandLink>
+	                <p:graphicImage name="images/excel.jpeg" width="24"/>
+	                <p:dataExporter type="xls" target="datatableEvento" fileName="Eventos" />
+	            </h:commandLink>
+	        </f:facet>
 
 
 		</p:dataTable>

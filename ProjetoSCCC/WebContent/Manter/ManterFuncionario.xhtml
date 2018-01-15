@@ -111,12 +111,11 @@
 				</p:commandButton>
 
 
-				<p:commandButton styleClass="ui-priority-primary"
+			<!-- 	<p:commandButton styleClass="ui-priority-primary"
 					icon="ui-icon-close" onclick="confirmation.show()">
 					<f:setPropertyActionListener value="#{lista}"
 						target="#{funcionario.funcionarioPOJO}" />
-				</p:commandButton>
-
+				</p:commandButton>  -->
 
 
 			</p:column>
@@ -137,11 +136,11 @@
 
 
 
-				<p:commandButton id="confirm" value="Sim"
+	    <p:commandButton id="confirm" value="Sim"
 					oncomplete="confirmation.hide()"
 					actionListener="#{funcionario.deletarFuncionario()}"
 					update="datatableFunc">
-				</p:commandButton>
+				</p:commandButton> 
 
 				<p:commandButton id="decline" value="Não"
 					onclick="confirmation.hide()" type="button" />
