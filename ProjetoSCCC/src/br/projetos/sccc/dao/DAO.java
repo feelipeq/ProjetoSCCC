@@ -13,7 +13,7 @@ public class DAO {
 	protected ResultSet rs;
 	
 	protected String erro;
-	private String url="jdbc:mysql://li1695:3306/db_tarefa";
+	private String url="";
 	
 	
 	public boolean abreConexao() throws Exception{
@@ -22,7 +22,7 @@ public class DAO {
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			cn = DriverManager.getConnection(url,"rafael","348787");
+			cn = DriverManager.getConnection(url,"","");
 			return true;
 			
 		} catch (Exception e) {
